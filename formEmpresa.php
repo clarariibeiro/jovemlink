@@ -9,33 +9,36 @@
 
             <div class="mb-md-5 mt-md-4 pb-5">
 
-              <h2 class="fw-bold mb-2 text-uppercase">Cadastro de Usuário:</h2>
+              <h2 class="fw-bold mb-2 text-uppercase">Cadastro da Empresa:</h2>
 
+              <h5 class="fw-bold mb-2 text-uppercase">Dados da Empresa:</h5>
               <div class="form-floating mt-3 mb-3 text-dark">
                 <input type="file" name="fotoUsuario" id="fotoUsuario" placeholder="Foto" class="form-control">
-                <label for="fotoUsuario">Foto</label>
-              </div>
-
-              <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="date" name="dataNascimentoUsuario" id="dataNascimentoUsuario" placeholder="Data de Nascimento" class="form-control">
-                <label for="dataNascimentoUsuario">Data de Nascimento</label>
+                <label for="fotoUsuario">Logo da Empresa</label>
               </div>
 
               <div class="form-floating mt-3 mb-3 text-dark">
                 <input type="text" name="nomeUsuario" id="nomeUsuario" placeholder="Nome" class="form-control form-control-lg" />
-                <label for="nomeUsuario">Nome</label>
+                <label for="nomeUsuario">Nome da Empresa</label>
+              </div>
+
+              
+              <div class="form-floating mt-3 mb-3 text-dark">
+                <input type="text" name="nomeUsuario" id="nomeUsuario" placeholder="Nome" class="form-control form-control-lg" />
+                <label for="nomeUsuario">Razão Social</label>
+              </div>
+
+            <div class="form-floating mt-3 mb-3 text-dark">
+                <input type="date" name="dataNascimentoUsuario" id="dataNascimentoUsuario" placeholder="Data de Nascimento" class="form-control">
+                <label for="dataNascimentoUsuario">Data de de Fundação</label>
               </div>
 
               <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="text" name="cpfUsuario" id="cpfUsuario" placeholder="000.000.000-00" class="form-control form-control-lg" maxlength="11" />
-                <label for="cpfUsuario">CPF</label>
+                <input type="text" name="cpfUsuario" id="cpfUsuario" placeholder="000.000.000-00" class="form-control form-control-lg" maxlength="14" />
+                <label for="cpfUsuario">CNPJ</label>
               </div>
 
-              <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="email" name="emailUsuario" id="emailUsuario" placeholder="nome@exemplo.com" class="form-control form-control-lg" />
-                <label for="emailUsuario">Email</label>
-              </div>
-
+            <h5 class="fw-bold mb-2 text-uppercase">Localização:</h5>
               <div class="form-floating mt-3 mb-3 text-dark">
                 <select name="estadoUsuario" id="estadoUsuario" class="form-select">
                   <option value="AC">Acre</option>
@@ -74,6 +77,13 @@
                 <label for="cidadeUsuario">Cidade</label>
               </div>
 
+            <h5 class="fw-bold mb-2 text-uppercase">Conta e Acesso:</h5>
+
+            <div class="form-floating mt-3 mb-3 text-dark">
+                <input type="email" name="emailUsuario" id="emailUsuario" placeholder="nome@exemplo.com" class="form-control form-control-lg" />
+                <label for="emailUsuario">Email da Empresa:</label>
+              </div>
+
               <div class="form-floating mt-3 mb-3 text-dark">
                 <input type="password" name="senhaUsuario" id="senhaUsuario" placeholder="Senha" class="form-control form-control-lg" />
                 <label for="senhaUsuario">Senha</label>
@@ -84,9 +94,10 @@
                 <label for="confirmarSenhaUsuario">Confirmar Senha</label>
               </div>
 
-              <form action="listarVagas.php" method="POST">
-              <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5 mt-3" type="submit">Cadastrar</button>
-              </form>
+            <form action="index.php" method="POST">
+              <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5 mt-3" type="submit" href>Cadastrar</button>
+            </form>
+
             </div>
 
           </div>
@@ -95,3 +106,4 @@
     </div>
   </div>
 </section>
+

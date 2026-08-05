@@ -9,7 +9,7 @@
 
             <div class="mb-md-5 mt-md-4 pb-5">
 
-              <h2 class="fw-bold mb-2 text-uppercase">Login de Candidato</h2>
+              <h2 class="fw-bold mb-2 text-uppercase">Login da Empresa</h2>
               <p class="text-white-50 mb-5">Por favor, informe seus dados de acesso:</p>
 
               <div data-mdb-input-init class="form-outline form-white mb-4">
@@ -22,9 +22,9 @@
                 <label class="form-label" for="senhaUsuario">Senha</label>
               </div>
 
-              <form action="index.php" method="POST">
-              <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-              </form>
+                <form action="index.php" method="POST">
+                  <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                </form>
               <div class="d-flex justify-content-center text-center mt-4 pt-1">
                 <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
                 <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
@@ -34,7 +34,7 @@
             </div>
 
             <div>
-              <p class="mb-0">Ainda não tem uma conta? <a href="formUsuario.php" class="text-white-50 fw-bold">Clique aqui!</a>
+              <p class="mb-0">Ainda não tem uma conta de Empresa? <a href="formEmpresa.php" class="text-white-50 fw-bold">Clique aqui!</a>
               </p>
             </div>
 
