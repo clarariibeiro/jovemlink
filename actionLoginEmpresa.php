@@ -3,22 +3,20 @@
     include "conexaoBD.php"; 
     session_start(); 
 
-    $emailUsuario = mysqli_real_escape_string($conn, $_POST['emailUsuario']); 
-    $senhaUsuario = mysqli_real_escape_string($conn, $_POST['senhaUsuario']);
+    $emailEmpresa = mysqli_real_escape_string($conn, $_POST['emailEmpresa ']); 
+    $senhaEmpresa = mysqli_real_escape_string($conn, $_POST['senhaEmpresa ']);
 
     $buscarLogin = "SELECT * 
-                    FROM Usuarios 
-                    WHERE emailUsuario = '$emailUsuario' 
-                    AND senhaUsuario = md5('$senhaUsuario')
-                    AND nivelUsuario = 'empresa'";
+                    FROM Empresa 
+                    WHERE emailEmpresa = '$emailEmpresa' 
+                    AND senhaEmpresa = md5('$senhaEmpresa')
 
     $efetuarLogin = mysqli_query($conn, $buscarLogin); 
 
     if ($registro = mysqli_fetch_assoc($efetuarLogin)) {
-        $_SESSION['idUsuario']    = $registro['idUsuario'];
-        $_SESSION['nomeUsuario']  = $registro['nomeUsuario'];
-        $_SESSION['emailUsuario'] = $registro['emailUsuario'];
-        $_SESSION['nivelUsuario'] = $registro['nivelUsuario'];
+        $_SESSION['idEmpresa']    = $registro['idEmpresa'];
+        $_SESSION['nomeEmpresa']  = $registro['nomeEmpresa'];
+        $_SESSION['emailEmpresa'] = $registro['emailEmpresa'];
         $_SESSION['logado']       = true;
 
         header("Location: index.php");

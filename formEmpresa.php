@@ -11,36 +11,38 @@
 
               <h2 class="fw-bold mb-2 text-uppercase">Cadastro da Empresa:</h2>
 
+              <form action="actionEmpresa.php" method="POST">
+
               <h5 class="fw-bold mb-2 text-uppercase">Dados da Empresa:</h5>
               <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="file" name="fotoUsuario" id="fotoUsuario" placeholder="Foto" class="form-control">
-                <label for="fotoUsuario">Logo da Empresa</label>
+                <input type="file" name="fotoEmpresa" id="fotoEmpresa" placeholder="Foto" class="form-control">
+                <label for="fotoEmpresa">Logo da Empresa</label>
               </div>
 
               <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="text" name="nomeUsuario" id="nomeUsuario" placeholder="Nome" class="form-control form-control-lg" />
-                <label for="nomeUsuario">Nome da Empresa</label>
+                <input type="text" name="nomeEmpresa" id="nomeEmpresa" placeholder="Nome" class="form-control form-control-lg" />
+                <label for="nomeEmpresa">Nome da Empresa</label>
               </div>
 
               
               <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="text" name="nomeUsuario" id="nomeUsuario" placeholder="Nome" class="form-control form-control-lg" />
-                <label for="nomeUsuario">Razão Social</label>
+                <input type="text" name="razaoSocialEmpresa" id="razaoSocialEmpresa" placeholder="razaoSocialEmpresa" class="form-control form-control-lg" />
+                <label for="razaoSocialEmpresa">Razão Social</label>
               </div>
 
             <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="date" name="dataNascimentoUsuario" id="dataNascimentoUsuario" placeholder="Data de Nascimento" class="form-control">
-                <label for="dataNascimentoUsuario">Data de de Fundação</label>
+                <input type="date" name="dataFundacaoEmpresa" id="dataFundacaoEmpresa" placeholder="Data de Nascimento" class="form-control">
+                <label for="dataFundacaoEmpresa">Data de de Fundação</label>
               </div>
 
               <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="text" name="cpfUsuario" id="cpfUsuario" placeholder="000.000.000-00" class="form-control form-control-lg" maxlength="14" />
-                <label for="cpfUsuario">CNPJ</label>
+                <input type="text" name="cnpjEmpresa" id="cpfEmpresa" placeholder="00.000.000./0000-00" class="form-control form-control-lg" maxlength="10" />
+                <label for="cnpjEmpresa">CNPJ</label>
               </div>
 
             <h5 class="fw-bold mb-2 text-uppercase">Localização:</h5>
               <div class="form-floating mt-3 mb-3 text-dark">
-                <select name="estadoUsuario" id="estadoUsuario" class="form-select">
+                <select name="estadoEmpresa" id="estadoEmpresa" class="form-select">
                   <option value="AC">Acre</option>
                   <option value="AL">Alagoas</option>
                   <option value="AP">Amapá</option>
@@ -69,32 +71,32 @@
                   <option value="SE">Sergipe</option>
                   <option value="TO">Tocantins</option>
                 </select>
-                <label for="estadoUsuario">Estado</label>
+                <label for="estadoEmpresa">Estado</label>
               </div>
 
               <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="text" name="cidadeUsuario" id="cidadeUsuario" placeholder="Cidade" class="form-control form-control-lg" />
-                <label for="cidadeUsuario">Cidade</label>
+                <input type="text" name="cidadeEmpresa" id="cidadeEmpresa" placeholder="Cidade" class="form-control form-control-lg" />
+                <label for="cidadeEmpresa">Cidade</label>
               </div>
 
             <h5 class="fw-bold mb-2 text-uppercase">Conta e Acesso:</h5>
 
             <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="email" name="emailUsuario" id="emailUsuario" placeholder="nome@exemplo.com" class="form-control form-control-lg" />
-                <label for="emailUsuario">Email da Empresa:</label>
+                <input type="email" name="emailEmpresa" id="emailEmpresa" placeholder="empresa@exemplo.com" class="form-control form-control-lg" />
+                <label for="emailEmpresa">Email da Empresa:</label>
               </div>
 
               <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="password" name="senhaUsuario" id="senhaUsuario" placeholder="Senha" class="form-control form-control-lg" />
-                <label for="senhaUsuario">Senha</label>
+                <input type="password" name="senhaEmpresa" id="senhaEmpresa" placeholder="Senha" class="form-control form-control-lg" />
+                <label for="senhaEmpresa">Senha</label>
               </div>
 
               <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="password" name="confirmarSenhaUsuario" id="confirmarSenhaUsuario" placeholder="Confirmar Senha" class="form-control form-control-lg" />
-                <label for="confirmarSenhaUsuario">Confirmar Senha</label>
+                <input type="password" name="confirmarSenhaEmpresa" id="confirmarSenhaEmpresa" placeholder="Confirmar Senha" class="form-control form-control-lg" />
+                <label for="confirmarSenhaEmpresa">Confirmar Senha</label>
               </div>
 
-            <form action="index.php" method="POST">
+            
               <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5 mt-3" type="submit" href>Cadastrar</button>
             </form>
 

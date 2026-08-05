@@ -3,48 +3,48 @@
 <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        $fotoUsuario = $dataNascimentoUsuario = $nomeUsuario = $razaoSocial = $cpfUsuario = "";
-        $emailUsuario = $estadoUsuario = $cidadeUsuario = $senhaUsuario = $confirmarSenhaUsuario = "";
+        $fotoEmpresa =  $nomeEmpresa = $razaoSocialEmpresaEmpresa = $dataFundacaoEmpresa = $cnpjEmpresa = "";
+        $estadoEmpresa = $estadoEmpresa = $cidadeEmpresa = $emailEmpresa = $senhaEmpresa = $confirmarSenhaEmpresa = "";
 
         $erroPreenchimento = false;
 
-        if (empty($_POST["nomeUsuario"])) {
+        if (empty($_POST["nomeEmpresa"])) {
             echo "<div class='alert alert-warning text-center'>O campo <strong>NOME DA EMPRESA</strong> é obrigatório!</div>";
             $erroPreenchimento = true;
         } else {
-            $nomeUsuario = filtrar_entrada($_POST["nomeUsuario"]);
+            $nomeEmpresa = filtrar_entrada($_POST["nomeEmpresa"]);
         }
 
-        if (empty($_POST["razaoSocial"])) {
+        if (empty($_POST["razaoSocialEmpresa"])) {
             echo "<div class='alert alert-warning text-center'>O campo <strong>RAZÃO SOCIAL</strong> é obrigatório!</div>";
             $erroPreenchimento = true;
         } else {
-            $razaoSocial = filtrar_entrada($_POST["razaoSocial"]);
+            $razaoSocialEmpresa = filtrar_entrada($_POST["razaoSocialEmpresa"]);
         }
 
-        if (empty($_POST["dataNascimentoUsuario"])) {
+        if (empty($_POST["dataFundacaoEmpresa"])) {
             echo "<div class='alert alert-warning text-center'>O campo <strong>DATA DE FUNDAÇÃO</strong> é obrigatório!</div>";
             $erroPreenchimento = true;
         } else {
-            $dataNascimentoUsuario = filtrar_entrada($_POST["dataNascimentoUsuario"]);
+            $dataFundacaoEmpresa = filtrar_entrada($_POST["dataFundacaoEmpresa"]);
 
-            if (strlen($dataNascimentoUsuario) == 10) {
-                $diaNascimentoUsuario = substr($dataNascimentoUsuario, 8, 2);
-                $mesNascimentoUsuario = substr($dataNascimentoUsuario, 5, 2);
-                $anoNascimentoUsuario = substr($dataNascimentoUsuario, 0, 4);
+            if (strlen($dataFundacaoEmpresa) == 10) {
+                $diaFundacaoEmpresa = substr($dataFundacaoEmpresa, 8, 2);
+                $mesFundacaoEmpresa = substr($dataFundacaoEmpresa, 5, 2);
+                $anoFundacaoEmpresa = substr($dataFundacaoEmpresa, 0, 4);
             } else {
                 echo "<div class='alert alert-warning text-center'><strong>DATA DE FUNDAÇÃO</strong> inválida!</div>";
                 $erroPreenchimento = true;
             }
         }
 
-        if (empty($_POST["cpfUsuario"])) {
+        if (empty($_POST["cnpjEmpresa"])) {
             echo "<div class='alert alert-warning text-center'>O campo <strong>CNPJ</strong> é obrigatório!</div>";
             $erroPreenchimento = true;
         } else {
-            $cpfUsuario = filtrar_entrada($_POST["cpfUsuario"]);
+            $cnpjEmpresa = filtrar_entrada($_POST["cnpjEmpresa"]);
             
-            $cnpjLimpo = preg_replace('/[^0-9]/', '', $cpfUsuario);
+            $cnpjLimpo = preg_replace('/[^0-9]/', '', $cnpjEmpresa);
 
             if (strlen($cnpjLimpo) != 14) {
                 echo "<div class='alert alert-warning text-center'>O <strong>CNPJ</strong> deve conter exatamente 14 dígitos numéricos!</div>";
@@ -52,62 +52,62 @@
             }
         }
 
-        if (empty($_POST["emailUsuario"])) {
+        if (empty($_POST["estadoEmpresa"])) {
+            echo "<div class='alert alert-warning text-center'>O campo <strong>ESTADO</strong> é obrigatório!</div>";
+            $erroPreenchimento = true;
+        } else {
+            $estadoEmpresa = filtrar_entrada($_POST["estadoEmpresa"]);
+        }
+
+        if (empty($_POST["cidadeEmpresa"])) {
+            echo "<div class='alert alert-warning text-center'>O campo <strong>CIDADE</strong> é obrigatório!</div>";
+            $erroPreenchimento = true;
+        } else {
+            $cidadeEmpresa = filtrar_entrada($_POST["cidadeEmpresa"]);
+        }
+
+        if (empty($_POST["emailEmpresa"])) {
             echo "<div class='alert alert-warning text-center'>O campo <strong>EMAIL DA EMPRESA</strong> é obrigatório!</div>";
             $erroPreenchimento = true;
         } else {
-            $emailUsuario = filtrar_entrada($_POST["emailUsuario"]);
+            $emailEmpresa = filtrar_entrada($_POST["emailEmpresa"]);
 
-            if (!filter_var($emailUsuario, FILTER_VALIDATE_EMAIL)) {
+            if (!filter_var($emailEmpresa, FILTER_VALIDATE_EMAIL)) {
                 echo "<div class='alert alert-warning text-center'>O formato do <strong>EMAIL</strong> é inválido!</div>";
                 $erroPreenchimento = true;
             }
         }
 
-        if (empty($_POST["estadoUsuario"])) {
-            echo "<div class='alert alert-warning text-center'>O campo <strong>ESTADO</strong> é obrigatório!</div>";
-            $erroPreenchimento = true;
-        } else {
-            $estadoUsuario = filtrar_entrada($_POST["estadoUsuario"]);
-        }
-
-        if (empty($_POST["cidadeUsuario"])) {
-            echo "<div class='alert alert-warning text-center'>O campo <strong>CIDADE</strong> é obrigatório!</div>";
-            $erroPreenchimento = true;
-        } else {
-            $cidadeUsuario = filtrar_entrada($_POST["cidadeUsuario"]);
-        }
-
-        $senhaOriginal = "";
-        if (empty($_POST["senhaUsuario"])) {
+        
+        if (empty($_POST["senhaEmpresa"])) {
             echo "<div class='alert alert-warning text-center'>O campo <strong>SENHA</strong> é obrigatório!</div>";
             $erroPreenchimento = true;
         } else {
-            $senhaOriginal = $_POST["senhaUsuario"];
+            $senhaEmpresa = $_POST["senhaEmpresa"];
         }
 
-        if (empty($_POST["confirmarSenhaUsuario"])) {
+        if (empty($_POST["confirmarSenhaEmpresa"])) {
             echo "<div class='alert alert-warning text-center'>O campo <strong>CONFIRMAR SENHA</strong> é obrigatório!</div>";
             $erroPreenchimento = true;
         } else {
-            $confirmarSenhaOriginal = $_POST["confirmarSenhaUsuario"];
+            $confirmarSenhaEmpresa = $_POST["confirmarSenhaEmpresa"];
 
-            if ($senhaOriginal !== $confirmarSenhaOriginal) {
+            if ($senhaEmpresa !== $confirmarSenhaEmpresa) {
                 echo "<div class='alert alert-warning text-center'>As <strong>SENHAS</strong> informadas não correspondem!</div>";
                 $erroPreenchimento = true;
             } else {
-                $senhaUsuario = md5(filtrar_entrada($senhaOriginal));
+                $senhaEmpresa = md5(filtrar_entrada($senhaEmpresa));
             }
         }
 
         $diretorio    = "assets/img/";
-        $fotoUsuario  = $diretorio . basename($_FILES['fotoUsuario']['name']);
-        $tipoDaImagem = strtolower(pathinfo($fotoUsuario, PATHINFO_EXTENSION));
+        $fotoEmpresa  = $diretorio . basename($_FILES['fotoEmpresa']['name']);
+        $tipoDaImagem = strtolower(pathinfo($fotoEmpresa, PATHINFO_EXTENSION));
         $erroUpload   = false;
 
-        if (isset($_FILES['fotoUsuario']) && $_FILES['fotoUsuario']['size'] > 0) {
+        if (isset($_FILES['fotoEmpresa']) && $_FILES['fotoEmpresa']['size'] > 0) {
 
-            if ($_FILES['fotoUsuario']['size'] > 5000000) {
+            if ($_FILES['fotoEmpresa']['size'] > 5000000) {
                 echo "<div class='alert alert-warning text-center'>A <strong>LOGO DA EMPRESA</strong> deve ser menor do que 5MB!</div>";
                 $erroUpload = true;
             }
@@ -118,7 +118,7 @@
             }
 
             if (!$erroUpload) {
-                if (!move_uploaded_file($_FILES["fotoUsuario"]["tmp_name"], $fotoUsuario)) {
+                if (!move_uploaded_file($_FILES["fotoEmpresa"]["tmp_name"], $fotoEmpresa)) {
                     echo "<div class='alert alert-danger text-center'>Erro ao tentar mover a imagem para o diretório <strong>$diretorio</strong>!</div>";
                     $erroUpload = true;
                 }
@@ -132,45 +132,46 @@
 
             include "conexaoBD.php";
 
-            $inserirUsuario = "INSERT INTO Usuarios (fotoUsuario, dataNascimentoUsuario, nomeUsuario, cpfUsuario, emailUsuario, estadoUsuario, cidadeUsuario, senhaUsuario, nivelUsuario) 
-                               VALUES ('$fotoUsuario', '$dataNascimentoUsuario', '$nomeUsuario', '$cpfUsuario', '$emailUsuario', '$estadoUsuario', '$cidadeUsuario', '$senhaUsuario', 'empresa')";
+            $inserirEmpresa = "INSERT INTO Empresa (fotoEmpresa, nomeEmpresa, razaoSocialEmpresaEmpresa, dataFundacaoEmpresa, cnpjEmpresa, estadoEmpresa, cidadeEmpresa, emailEmpresa, senhaEmpresa);
 
-            if (mysqli_query($conn, $inserirUsuario)) {
+                               VALUES ('$fotoEmpresa', '$nomeEmpresa', '$razaoSocialEmpresaEmpresa', '$dataFundacaoEmpresa', '$cnpjEmpresa', '$estadoEmpresa', '$cidadeEmpresa', '$emailEmpresa', '$senhaEmpresa')";
+
+            if (mysqli_query($conn, $inserirEmpresa)) {
 
                 echo "<div class='alert alert-success text-center'>O cadastro da <strong>EMPRESA</strong> foi efetuado com sucesso!</div>";
                 echo "
                     <div class='container mb-3 mt-3'>
                         <div class='container mb-3 mt-3 text-center'>
-                            <img src='$fotoUsuario' title='Logo de $nomeUsuario' style='width:150px' class='img-thumbnail'>
+                            <img src='$fotoEmpresa' title='Logo de $nomeEmpresa' style='width:150px' class='img-thumbnail'>
                         </div>
                         <table class='table'>
                             <tr>
                                 <th>NOME DA EMPRESA</th>
-                                <td>$nomeUsuario</td>
+                                <td>$nomeEmpresa</td>
                             </tr>
                             <tr>
                                 <th>RAZÃO SOCIAL</th>
-                                <td>$razaoSocial</td>
+                                <td>$razaoSocialEmpresa</td>
                             </tr>
                             <tr>
                                 <th>CNPJ</th>
-                                <td>$cpfUsuario</td>
+                                <td>$cnpjEmpresa</td>
                             </tr>
                             <tr>
                                 <th>DATA DE FUNDAÇÃO</th>
-                                <td>$diaNascimentoUsuario/$mesNascimentoUsuario/$anoNascimentoUsuario</td>
+                                <td>$diaFundacaoEmpresa/$mesFundacaoEmpresa/$anoFundacaoEmpresa</td>
                             </tr>
                             <tr>
                                 <th>EMAIL</th>
-                                <td>$emailUsuario</td>
+                                <td>$emailEmpresa</td>
                             </tr>
                             <tr>
                                 <th>ESTADO</th>
-                                <td>$estadoUsuario</td>
+                                <td>$estadoEmpresa</td>
                             </tr>
                             <tr>
                                 <th>CIDADE</th>
-                                <td>$cidadeUsuario</td>
+                                <td>$cidadeEmpresa</td>
                             </tr>
                         </table>
                     </div>
@@ -181,7 +182,7 @@
         }
 
     } else {
-        header("location:formEmpresa.php");
+        header("location:formLoginEmpresa.php");
         exit();
     }
 
