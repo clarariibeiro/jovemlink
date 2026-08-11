@@ -11,6 +11,9 @@
 
               <h2 class="fw-bold mb-2 text-uppercase">Cadastro de Usuário:</h2>
 
+              <form action="actionCandidato.php" method="POST" enctype="multipart/form-data">
+
+
               <div class="form-floating mt-3 mb-3 text-dark">
                 <input type="file" name="fotoUsuario" id="fotoUsuario" placeholder="Foto" class="form-control">
                 <label for="fotoUsuario">Foto</label>
@@ -84,10 +87,8 @@
                 <label for="confirmarSenhaUsuario">Confirmar Senha</label>
               </div>
 
-              <form action="listarVagas.php" method="POST">
-              <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5 mt-3" type="submit">Cadastrar</button>
-              </form>
-            </div>
+             <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5 mt-3" type="submit" href>Cadastrar</button>
+            </form>
 
           </div>
         </div>

@@ -1,5 +1,6 @@
         <!-- Footer-->
-        <footer class="py-5 bg-black">
+        <br><br><br><br><br><br><br>
+        <footer class="py-5 bg-black fixed-bottom mt-5">
             <div class="container px-5"><p class="m-0 text-center text-white small">jovemmlink@gmail.com <br><br> jovemmlink</p></div>
         </footer>
         <!-- Bootstrap core JS-->

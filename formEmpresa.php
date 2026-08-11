@@ -11,7 +11,7 @@
 
               <h2 class="fw-bold mb-2 text-uppercase">Cadastro da Empresa:</h2>
 
-              <form action="actionEmpresa.php" method="POST">
+              <form action="actionEmpresa.php" method="POST" enctype="multipart/form-data">
 
               <h5 class="fw-bold mb-2 text-uppercase">Dados da Empresa:</h5>
               <div class="form-floating mt-3 mb-3 text-dark">
@@ -36,7 +36,7 @@
               </div>
 
               <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="text" name="cnpjEmpresa" id="cpfEmpresa" placeholder="00.000.000./0000-00" class="form-control form-control-lg" maxlength="10" />
+                <input type="text" name="cnpjEmpresa" id="cnpjEmpresa" placeholder="00.000.000./0000-00" class="form-control form-control-lg" maxlength="18" />
                 <label for="cnpjEmpresa">CNPJ</label>
               </div>
 

@@ -3,8 +3,10 @@
 <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        $fotoEmpresa =  $nomeEmpresa = $razaoSocialEmpresaEmpresa = $dataFundacaoEmpresa = $cnpjEmpresa = "";
-        $estadoEmpresa = $estadoEmpresa = $cidadeEmpresa = $emailEmpresa = $senhaEmpresa = $confirmarSenhaEmpresa = "";
+        $fotoEmpresa =  $nomeEmpresa = $razaoSocialEmpresa = $dataFundacaoEmpresa = $cnpjEmpresa = "";
+        $estadoEmpresa = $cidadeEmpresa = $emailEmpresa = $senhaEmpresa = $confirmarSenhaEmpresa = "";
+
+        $dataCadastroEmpresa = date("Y-m-d H:i:s");
 
         $erroPreenchimento = false;
 
@@ -46,7 +48,7 @@
             
             $cnpjLimpo = preg_replace('/[^0-9]/', '', $cnpjEmpresa);
 
-            if (strlen($cnpjLimpo) != 14) {
+            if (strlen($cnpjLimpo) <= 14) {
                 echo "<div class='alert alert-warning text-center'>O <strong>CNPJ</strong> deve conter exatamente 14 dígitos numéricos!</div>";
                 $erroPreenchimento = true;
             }
@@ -132,9 +134,9 @@
 
             include "conexaoBD.php";
 
-            $inserirEmpresa = "INSERT INTO Empresa (fotoEmpresa, nomeEmpresa, razaoSocialEmpresaEmpresa, dataFundacaoEmpresa, cnpjEmpresa, estadoEmpresa, cidadeEmpresa, emailEmpresa, senhaEmpresa);
+            $inserirEmpresa = "INSERT INTO Empresa (fotoEmpresa, nomeEmpresa, razaoSocialEmpresa, dataFundacaoEmpresa, cnpjEmpresa, estadoEmpresa, cidadeEmpresa, emailEmpresa, senhaEmpresa, dataCadastroEmpresa)
 
-                               VALUES ('$fotoEmpresa', '$nomeEmpresa', '$razaoSocialEmpresaEmpresa', '$dataFundacaoEmpresa', '$cnpjEmpresa', '$estadoEmpresa', '$cidadeEmpresa', '$emailEmpresa', '$senhaEmpresa')";
+                               VALUES ('$fotoEmpresa', '$nomeEmpresa', '$razaoSocialEmpresa', '$dataFundacaoEmpresa', '$cnpjEmpresa', '$estadoEmpresa', '$cidadeEmpresa', '$emailEmpresa', '$senhaEmpresa', '$dataCadastroEmpresa')";
 
             if (mysqli_query($conn, $inserirEmpresa)) {
 

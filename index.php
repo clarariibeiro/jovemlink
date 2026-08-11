@@ -9,13 +9,14 @@
                     <div class="col-lg-6 order-lg-2">
                         <div class="p-5"><img class="img-fluid rounded-circle" src="assets/img/01.jpg" alt="..." /></div>
                     </div>
-                    <div class="col-lg-6 order-lg-1">
-                        <div class="p-5">
-                            <h2 class="display-4"><strong>Sobre a plataforma<strong></h2>
-                            <hr class="border border-5 border-primary">
-                            <h1 class="display-4">Conectando jovens às melhores oportunidades</h1>
-                            <p>Nossa plataforma foi desenvolvida para facilitar o acesso de jovens ao mercado de trabalho. Reunimos vagas de emprego, estágio e programas de jovem aprendiz em um único lugar, tornando a busca por oportunidades mais prática, organizada e acessível. Nosso objetivo é aproximar candidatos de empresas que valorizam novos talentos e desejam investir em profissionais em início de carreira.</p>
-                        </div>
+            <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                    <h2 class="display-4"><strong>Sobre a plataforma</strong></h2>
+                    <hr class="border border-5" style="border-color: #0d6efd; opacity: 10;">
+                    <h1 class="display-4">Conectando jovens às melhores oportunidades</h1>
+                    <p>Nossa plataforma foi desenvolvida para facilitar o acesso de jovens ao mercado de trabalho. Reunimos vagas de emprego, estágio e programas de jovem aprendiz em um único lugar, tornando a busca por oportunidades mais prática, organizada e acessível. Nosso objetivo é aproximar candidatos de empresas que valorizam novos talentos e desejam investir em profissionais em início de carreira.</p>
+                </div>
+            </div>
                     </div>
                 </div>
             </div>
@@ -30,7 +31,7 @@
                     <div class="col-lg-6">
                         <div class="p-5">
                             <h2 class="display-4"><strong>Nossa missão</strong></h2>
-                            <hr class="border border-5 border-primary">
+                            <hr class="border border-5" style="border-color: #0d6efd; opacity: 10;">
                             <h1 class="display-4">Acreditamos no potencial de cada jovem</h1>
                             <p>Sabemos que conquistar a primeira oportunidade pode ser um desafio. Por isso, criamos um ambiente onde candidatos e empresas podem se conectar de forma simples e eficiente. Nossa missão é incentivar o desenvolvimento profissional dos jovens, oferecendo uma plataforma confiável para encontrar oportunidades que contribuam para o crescimento pessoal e para a construção de uma carreira de sucesso.</p>
                         </div>

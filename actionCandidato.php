@@ -4,36 +4,10 @@
         //Verifica se o método de envio das informações do form é "POST"
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             //Cria variáveis para armazenar as informações recebidas do array $_POST
-            $fotoUsuario = $nomeUsuario = $cpfUsuario = $dataNascimentoUsuario = $estadoUsuario = $cidadeUsuario = $emailUsuario = $senhaUsuario = $confirmarSenhaUsuario = "";
+            $fotoUsuario = $dataNascimentoUsuario = $nomeUsuario = $cpfUsuario = $emailUsuario = $estadoUsuario = $cidadeUsuario = $senhaUsuario = $confirmarSenhaUsuario = "";
 
             //Variável booleana para controle de erros de preenchimento
             $erroPreenchimento = false;
-
-            //Validação do campo nomeUsuario
-            //Utiliza a função empty() para verificar se o campo está vazio
-            if(empty($_POST["nomeUsuario"])){
-                echo "<div class='alert alert-warning text-center'>O campo <strong>NOME</strong> é obrigatório!</div>";
-                $erroPreenchimento = true;
-            }
-            else{
-                //Se o $_POST["nomeUsuario"] não estiver vazio, é filtrado e armazenado na variável PHP
-                $nomeUsuario = filtrar_entrada($_POST["nomeUsuario"]);
-
-                //Utiliza a função preg_match() para verificar se há apenas letras no nome
-                if(!preg_match('/^[\p{L} ]+$/u', $nomeUsuario)){
-                    echo "<div class='alert alert-warning text-center'>O campo <strong>NOME</strong> deve conter apenas letras!</div>";
-                    $erroPreenchimento = true;
-                }
-            }
-
-            //Validação do campo cpfUsuario
-            if(empty($_POST["cpfUsuario"])){
-                echo "<div class='alert alert-warning text-center'>O campo <strong>CPF</strong> é obrigatório!</div>";
-                $erroPreenchimento = true;
-            }
-            else{
-                $cpfUsuario = filtrar_entrada($_POST["cpfUsuario"]);
-            }
 
             //Validação do campo dataNascimentoUsuario
             //Utiliza a função empty() para verificar se o campo está vazio
@@ -58,6 +32,41 @@
                 }
             }
 
+                        if(empty($_POST["nomeUsuario"])){
+                echo "<div class='alert alert-warning text-center'>O campo <strong>NOME</strong> é obrigatório!</div>";
+                $erroPreenchimento = true;
+            }
+            else{
+                //Se o $_POST["nomeUsuario"] não estiver vazio, é filtrado e armazenado na variável PHP
+                $nomeUsuario = filtrar_entrada($_POST["nomeUsuario"]);
+
+                //Utiliza a função preg_match() para verificar se há apenas letras no nome
+                if(!preg_match('/^[\p{L} ]+$/u', $nomeUsuario)){
+                    echo "<div class='alert alert-warning text-center'>O campo <strong>NOME</strong> deve conter apenas letras!</div>";
+                    $erroPreenchimento = true;
+                }
+            }
+
+            //Validação do campo cpfUsuario
+            if(empty($_POST["cpfUsuario"])){
+                echo "<div class='alert alert-warning text-center'>O campo <strong>CPF</strong> é obrigatório!</div>";
+                $erroPreenchimento = true;
+            }
+            else{
+                $cpfUsuario = filtrar_entrada($_POST["cpfUsuario"]);
+            }
+
+            //Validação do campo emailUsuario
+            //Utiliza a função empty() para verificar se o campo está vazio
+            if(empty($_POST["emailUsuario"])){
+                echo "<div class='alert alert-warning text-center'>O campo <strong>EMAIL</strong> é obrigatório!</div>";
+                $erroPreenchimento = true;
+            }
+            else{
+                //Se o $_POST["emailUsuario"] não estiver vazio, é filtrado e armazenado na variável PHP
+                $emailUsuario = filtrar_entrada($_POST["emailUsuario"]);
+            }
+
             //Validação do campo estadoUsuario
             if(empty($_POST["estadoUsuario"])){
                 echo "<div class='alert alert-warning text-center'>O campo <strong>ESTADO</strong> é obrigatório!</div>";
@@ -76,17 +85,6 @@
             else{
                 //Se o $_POST["cidadeUsuario"] não estiver vazio, é filtrado e armazenado na variável PHP
                 $cidadeUsuario = filtrar_entrada($_POST["cidadeUsuario"]);
-            }
-
-            //Validação do campo emailUsuario
-            //Utiliza a função empty() para verificar se o campo está vazio
-            if(empty($_POST["emailUsuario"])){
-                echo "<div class='alert alert-warning text-center'>O campo <strong>EMAIL</strong> é obrigatório!</div>";
-                $erroPreenchimento = true;
-            }
-            else{
-                //Se o $_POST["emailUsuario"] não estiver vazio, é filtrado e armazenado na variável PHP
-                $emailUsuario = filtrar_entrada($_POST["emailUsuario"]);
             }
 
             //Validação do campo senhaUsuario
@@ -155,7 +153,7 @@
             if(!$erroPreenchimento && !$erroUpload){
 
                 //Cria uma variável para armazenar a QUERY que realiza a inserção de dados na tabela Usuarios
-                $inserirUsuario = "INSERT INTO Usuarios (fotoUsuario, nomeUsuario, cpfUsuario, dataNascimentoUsuario, estadoUsuario, cidadeUsuario, emailUsuario, senhaUsuario, nivelUsuario) VALUES ('$fotoUsuario', '$nomeUsuario', '$cpfUsuario', '$dataNascimentoUsuario', '$estadoUsuario', '$cidadeUsuario', '$emailUsuario', '$senhaUsuario', 'usuario')";
+                $inserirUsuario = "INSERT INTO Usuarios (fotoUsuario, dataNascimentoUsuario, nomeUsuario, cpfUsuario, emailUsuario, estadoUsuario, cidadeUsuario, senhaUsuario, confirmarSenhaUsuario, nivelUsuario) VALUES ('$fotoUsuario', '$dataNascimentoUsuario', '$nomeUsuario', '$cpfUsuario', '$emailUsuario', '$estadoUsuario', '$cidadeUsuario', '$senhaUsuario', '$confirmarSenhaUsuario', 'usuario')";
 
                 //Inclui o arquivo de conexão com o Banco de Dados
                 include "conexaoBD.php";
@@ -172,6 +170,10 @@
                             </div>
                             <table class='table'>
                                 <tr>
+                                    <th>DATA DE NASCIMENTO</th>
+                                    <td>$diaNascimentoUsuario/$mesNascimentoUsuario/$anoNascimentoUsuario</td>
+                                </tr>
+                                <tr>
                                     <th>NOME</th>
                                     <td>$nomeUsuario</td>
                                 </tr>
@@ -180,8 +182,8 @@
                                     <td>$cpfUsuario</td>
                                 </tr>
                                 <tr>
-                                    <th>DATA DE NASCIMENTO</th>
-                                    <td>$diaNascimentoUsuario/$mesNascimentoUsuario/$anoNascimentoUsuario</td>
+                                <th>EMAIL</th>
+                                    <td>$emailUsuario</td>
                                 </tr>
                                 <tr>
                                     <th>ESTADO</th>
@@ -192,15 +194,11 @@
                                     <td>$cidadeUsuario</td>
                                 </tr>
                                 <tr>
-                                    <th>EMAIL</th>
-                                    <td>$emailUsuario</td>
-                                </tr>
-                                <tr>
                                     <th>SENHA</th>
                                     <td>$senhaUsuario</td>
                                 </tr>
                                 <tr>
-                                    <th>CONFIRMAR SENHA</th>
+                                <th>CONFIRMAR SENHA</th>
                                     <td>$confirmarSenhaUsuario</td>
                                 </tr>
                             </table>

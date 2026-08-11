@@ -3,7 +3,7 @@
     $hostBD   = "localhost";
     $userBD   = "root"; 
     $senhaBD  = "root"; 
-    $database = "jovemlink1"; 
+    $database = "jovemlink"; 
 
     $conn = mysqli_connect($hostBD, $userBD, $senhaBD, $database);
 
