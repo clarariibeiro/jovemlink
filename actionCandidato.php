@@ -32,7 +32,7 @@
                 }
             }
 
-                        if(empty($_POST["nomeUsuario"])){
+            if(empty($_POST["nomeUsuario"])){
                 echo "<div class='alert alert-warning text-center'>O campo <strong>NOME</strong> é obrigatório!</div>";
                 $erroPreenchimento = true;
             }
@@ -182,7 +182,7 @@
                                     <td>$cpfUsuario</td>
                                 </tr>
                                 <tr>
-                                <th>EMAIL</th>
+                                    <th>EMAIL</th>
                                     <td>$emailUsuario</td>
                                 </tr>
                                 <tr>
@@ -198,11 +198,13 @@
                                     <td>$senhaUsuario</td>
                                 </tr>
                                 <tr>
-                                <th>CONFIRMAR SENHA</th>
+                                    <th>CONFIRMAR SENHA</th>
                                     <td>$confirmarSenhaUsuario</td>
                                 </tr>
                             </table>
-                        </div>
+                            <div class='text-center mt-4'>
+                                <a href='index.php' style='background-color: #007bff !important; color: #ffffff !important; border: 0px solid transparent !important; outline: 0 !important; box-shadow: none !important; font-weight: bold; padding: 10px 25px; text-decoration: none; display: inline-block; border-radius: 5px;'>Voltar para a Página Inicial</a>                            </div>
+                            </div>
                     ";
                 }
                 else{
