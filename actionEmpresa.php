@@ -1,199 +1,128 @@
-<?php include "header.php" ?>
+<?php
+echo "<script>window.location.href = 'formCadastrarVaga.php';</script>";
+// 1. Inicia a sessão no topo antes de qualquer saída de texto ou HTML
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// 2. Inclui a conexão e a estrutura
+include "conexaoBD.php"; 
+include "header.php"; 
+?>
+<br><br><br>
 
 <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        $fotoEmpresa =  $nomeEmpresa = $razaoSocialEmpresa = $dataFundacaoEmpresa = $cnpjEmpresa = "";
-        $estadoEmpresa = $cidadeEmpresa = $emailEmpresa = $senhaEmpresa = $confirmarSenhaEmpresa = "";
+    // 1. Processamento da Foto em Primeiro Lugar
+    $diretorio   = "assets/img/"; 
+    if (!file_exists($diretorio)) {
+        mkdir($diretorio, 0777, true);
+    }
 
-        $dataCadastroEmpresa = date("Y-m-d H:i:s");
+    $fotoName   = $_FILES['fotoEmpresa']['name'] ?? '';
+    $erroUpload = false; 
 
-        $erroPreenchimento = false;
-
-        if (empty($_POST["nomeEmpresa"])) {
-            echo "<div class='alert alert-warning text-center'>O campo <strong>NOME DA EMPRESA</strong> é obrigatório!</div>";
-            $erroPreenchimento = true;
-        } else {
-            $nomeEmpresa = filtrar_entrada($_POST["nomeEmpresa"]);
-        }
-
-        if (empty($_POST["razaoSocialEmpresa"])) {
-            echo "<div class='alert alert-warning text-center'>O campo <strong>RAZÃO SOCIAL</strong> é obrigatório!</div>";
-            $erroPreenchimento = true;
-        } else {
-            $razaoSocialEmpresa = filtrar_entrada($_POST["razaoSocialEmpresa"]);
-        }
-
-        if (empty($_POST["dataFundacaoEmpresa"])) {
-            echo "<div class='alert alert-warning text-center'>O campo <strong>DATA DE FUNDAÇÃO</strong> é obrigatório!</div>";
-            $erroPreenchimento = true;
-        } else {
-            $dataFundacaoEmpresa = filtrar_entrada($_POST["dataFundacaoEmpresa"]);
-
-            if (strlen($dataFundacaoEmpresa) == 10) {
-                $diaFundacaoEmpresa = substr($dataFundacaoEmpresa, 8, 2);
-                $mesFundacaoEmpresa = substr($dataFundacaoEmpresa, 5, 2);
-                $anoFundacaoEmpresa = substr($dataFundacaoEmpresa, 0, 4);
-            } else {
-                echo "<div class='alert alert-warning text-center'><strong>DATA DE FUNDAÇÃO</strong> inválida!</div>";
-                $erroPreenchimento = true;
-            }
-        }
-
-        if (empty($_POST["cnpjEmpresa"])) {
-            echo "<div class='alert alert-warning text-center'>O campo <strong>CNPJ</strong> é obrigatório!</div>";
-            $erroPreenchimento = true;
-        } else {
-            $cnpjEmpresa = filtrar_entrada($_POST["cnpjEmpresa"]);
-            
-            $cnpjLimpo = preg_replace('/[^0-9]/', '', $cnpjEmpresa);
-
-            if (strlen($cnpjLimpo) <= 14) {
-                echo "<div class='alert alert-warning text-center'>O <strong>CNPJ</strong> deve conter exatamente 14 dígitos numéricos!</div>";
-                $erroPreenchimento = true;
-            }
-        }
-
-        if (empty($_POST["estadoEmpresa"])) {
-            echo "<div class='alert alert-warning text-center'>O campo <strong>ESTADO</strong> é obrigatório!</div>";
-            $erroPreenchimento = true;
-        } else {
-            $estadoEmpresa = filtrar_entrada($_POST["estadoEmpresa"]);
-        }
-
-        if (empty($_POST["cidadeEmpresa"])) {
-            echo "<div class='alert alert-warning text-center'>O campo <strong>CIDADE</strong> é obrigatório!</div>";
-            $erroPreenchimento = true;
-        } else {
-            $cidadeEmpresa = filtrar_entrada($_POST["cidadeEmpresa"]);
-        }
-
-        if (empty($_POST["emailEmpresa"])) {
-            echo "<div class='alert alert-warning text-center'>O campo <strong>EMAIL DA EMPRESA</strong> é obrigatório!</div>";
-            $erroPreenchimento = true;
-        } else {
-            $emailEmpresa = filtrar_entrada($_POST["emailEmpresa"]);
-
-            if (!filter_var($emailEmpresa, FILTER_VALIDATE_EMAIL)) {
-                echo "<div class='alert alert-warning text-center'>O formato do <strong>EMAIL</strong> é inválido!</div>";
-                $erroPreenchimento = true;
-            }
-        }
-
-        
-        if (empty($_POST["senhaEmpresa"])) {
-            echo "<div class='alert alert-warning text-center'>O campo <strong>SENHA</strong> é obrigatório!</div>";
-            $erroPreenchimento = true;
-        } else {
-            $senhaEmpresa = $_POST["senhaEmpresa"];
-        }
-
-        if (empty($_POST["confirmarSenhaEmpresa"])) {
-            echo "<div class='alert alert-warning text-center'>O campo <strong>CONFIRMAR SENHA</strong> é obrigatório!</div>";
-            $erroPreenchimento = true;
-        } else {
-            $confirmarSenhaEmpresa = $_POST["confirmarSenhaEmpresa"];
-
-            if ($senhaEmpresa !== $confirmarSenhaEmpresa) {
-                echo "<div class='alert alert-warning text-center'>As <strong>SENHAS</strong> informadas não correspondem!</div>";
-                $erroPreenchimento = true;
-            } else {
-                $senhaEmpresa = md5(filtrar_entrada($senhaEmpresa));
-            }
-        }
-
-        $diretorio    = "assets/img/";
-        $fotoEmpresa  = $diretorio . basename($_FILES['fotoEmpresa']['name']);
-        $tipoDaImagem = strtolower(pathinfo($fotoEmpresa, PATHINFO_EXTENSION));
-        $erroUpload   = false;
-
-        if (isset($_FILES['fotoEmpresa']) && $_FILES['fotoEmpresa']['size'] > 0) {
-
-            if ($_FILES['fotoEmpresa']['size'] > 5000000) {
-                echo "<div class='alert alert-warning text-center'>A <strong>LOGO DA EMPRESA</strong> deve ser menor do que 5MB!</div>";
-                $erroUpload = true;
-            }
-
-            if ($tipoDaImagem != "jpg" && $tipoDaImagem != "jpeg" && $tipoDaImagem != "png" && $tipoDaImagem != "webp") {
-                echo "<div class='alert alert-warning text-center'>A <strong>LOGO DA EMPRESA</strong> deve estar nos formatos JPG, JPEG, PNG ou WEBP!</div>";
-                $erroUpload = true;
-            }
-
-            if (!$erroUpload) {
-                if (!move_uploaded_file($_FILES["fotoEmpresa"]["tmp_name"], $fotoEmpresa)) {
-                    echo "<div class='alert alert-danger text-center'>Erro ao tentar mover a imagem para o diretório <strong>$diretorio</strong>!</div>";
-                    $erroUpload = true;
-                }
-            }
-        } else {
-            echo "<div class='alert alert-warning text-center'>A <strong>LOGO DA EMPRESA</strong> é obrigatória!</div>";
+    if (isset($_FILES['fotoEmpresa']) && $_FILES['fotoEmpresa']['size'] > 0) {
+        $fotoEmpresa = $diretorio . time() . "_" . basename($fotoName);
+        if (!move_uploaded_file($_FILES["fotoEmpresa"]["tmp_name"], $fotoEmpresa)) {
+            echo "<div class='alert alert-danger text-center'>Erro ao enviar a imagem de perfil.</div>";
             $erroUpload = true;
         }
-
-        if (!$erroPreenchimento && !$erroUpload) {
-
-            include "conexaoBD.php";
-
-            $inserirEmpresa = "INSERT INTO Empresa (fotoEmpresa, nomeEmpresa, razaoSocialEmpresa, dataFundacaoEmpresa, cnpjEmpresa, estadoEmpresa, cidadeEmpresa, emailEmpresa, senhaEmpresa, dataCadastroEmpresa)
-
-                               VALUES ('$fotoEmpresa', '$nomeEmpresa', '$razaoSocialEmpresa', '$dataFundacaoEmpresa', '$cnpjEmpresa', '$estadoEmpresa', '$cidadeEmpresa', '$emailEmpresa', '$senhaEmpresa', '$dataCadastroEmpresa')";
-
-            if (mysqli_query($conn, $inserirEmpresa)) {
-
-                echo "<div class='alert alert-success text-center'>O cadastro da <strong>EMPRESA</strong> foi efetuado com sucesso!</div>";
-                echo "
-                    <div class='container mb-3 mt-3'>
-                        <div class='container mb-3 mt-3 text-center'>
-                            <img src='$fotoEmpresa' title='Logo de $nomeEmpresa' style='width:150px' class='img-thumbnail'>
-                        </div>
-                        <table class='table'>
-                            <tr>
-                                <th>NOME DA EMPRESA</th>
-                                <td>$nomeEmpresa</td>
-                            </tr>
-                            <tr>
-                                <th>RAZÃO SOCIAL</th>
-                                <td>$razaoSocialEmpresa</td>
-                            </tr>
-                            <tr>
-                                <th>CNPJ</th>
-                                <td>$cnpjEmpresa</td>
-                            </tr>
-                            <tr>
-                                <th>DATA DE FUNDAÇÃO</th>
-                                <td>$diaFundacaoEmpresa/$mesFundacaoEmpresa/$anoFundacaoEmpresa</td>
-                            </tr>
-                            <tr>
-                                <th>EMAIL</th>
-                                <td>$emailEmpresa</td>
-                            </tr>
-                            <tr>
-                                <th>ESTADO</th>
-                                <td>$estadoEmpresa</td>
-                            </tr>
-                            <tr>
-                                <th>CIDADE</th>
-                                <td>$cidadeEmpresa</td>
-                            </tr>
-                        </table>
-                    </div>
-                ";
-            } else {
-                echo "<div class='alert alert-danger text-center'>Erro ao tentar cadastrar <strong>EMPRESA</strong> no banco de dados!</div>";
-            }
-        }
-
     } else {
-        header("location:formLoginEmpresa.php");
-        exit();
+        $fotoEmpresa = $diretorio . "default_empresa.png";
     }
 
-    function filtrar_entrada($dado) {
-        $dado = trim($dado);
-        $dado = stripslashes($dado);
-        $dado = htmlspecialchars($dado);
-        return $dado;
+    // 2. Captura dos demais campos
+    $nomeEmpresa           = filtrar_entrada($_POST["nomeEmpresa"] ?? "");
+    $razaoSocialEmpresa    = filtrar_entrada($_POST["razaoSocialEmpresa"] ?? "");
+    $dataFundacaoRaw       = filtrar_entrada($_POST["dataFundacaoEmpresa"] ?? "");
+    $cnpjEmpresa           = filtrar_entrada($_POST["cnpjEmpresa"] ?? "");
+    $estadoEmpresa         = filtrar_entrada($_POST["estadoEmpresa"] ?? "");
+    $cidadeEmpresa         = filtrar_entrada($_POST["cidadeEmpresa"] ?? "");
+    $emailEmpresa          = filtrar_entrada($_POST["emailEmpresa"] ?? "");
+    $senhaInput            = filtrar_entrada($_POST["senhaEmpresa"] ?? "");
+    $confirmarSenhaInput   = filtrar_entrada($_POST["confirmarSenhaEmpresa"] ?? "");
+
+    // Ajuste do formato da data de fundação
+    $dataFundacaoEmpresa = !empty($dataFundacaoRaw) ? date('Y-m-d', strtotime($dataFundacaoRaw)) : date('Y-m-d');
+
+    $erroPreenchimento = false;
+
+    // Validações
+    if (empty($nomeEmpresa) || empty($emailEmpresa) || empty($senhaInput)) {
+        echo "<div class='alert alert-warning text-center'>Preencha todos os campos obrigatórios!</div>";
+        $erroPreenchimento = true;
     }
+
+    if (!empty($senhaInput) && $senhaInput !== $confirmarSenhaInput) {
+        echo "<div class='alert alert-warning text-center'>As senhas não coincidem!</div>";
+        $erroPreenchimento = true;
+    }
+
+    // 3. Gravação no Banco de Dados
+    if (!$erroPreenchimento && !$erroUpload) {
+        
+        $senhaEmpresa = md5($senhaInput);
+        $dataCadastro = date('Y-m-d H:i:s');
+
+        // Escapa os textos para evitar erros de sintaxe no MySQL
+        $nomeEmpresa        = mysqli_real_escape_string($conn, $nomeEmpresa);
+        $razaoSocialEmpresa = mysqli_real_escape_string($conn, $razaoSocialEmpresa);
+        $cnpjEmpresa        = mysqli_real_escape_string($conn, $cnpjEmpresa);
+        $estadoEmpresa      = mysqli_real_escape_string($conn, $estadoEmpresa);
+        $cidadeEmpresa      = mysqli_real_escape_string($conn, $cidadeEmpresa);
+        $emailEmpresa       = mysqli_real_escape_string($conn, $emailEmpresa);
+
+        // INSERT mantendo fotoEmpresa como o primeiro parâmetro
+        $sql = "INSERT INTO Empresa (
+                    fotoEmpresa, 
+                    nomeEmpresa, 
+                    razaoSocialEmpresa, 
+                    dataFundacaoEmpresa, 
+                    cnpjEmpresa, 
+                    estadoEmpresa, 
+                    cidadeEmpresa, 
+                    emailEmpresa, 
+                    senhaEmpresa, 
+                    dataCadastro
+                ) VALUES (
+                    '$fotoEmpresa', 
+                    '$nomeEmpresa', 
+                    '$razaoSocialEmpresa', 
+                    '$dataFundacaoEmpresa', 
+                    '$cnpjEmpresa', 
+                    '$estadoEmpresa', 
+                    '$cidadeEmpresa', 
+                    '$emailEmpresa', 
+                    '$senhaEmpresa', 
+                    '$dataCadastro'
+                )";
+
+        if (mysqli_query($conn, $sql)) {
+            $_SESSION['idEmpresa']    = mysqli_insert_id($conn);
+            $_SESSION['nomeEmpresa']  = $nomeEmpresa;
+            $_SESSION['emailEmpresa'] = $emailEmpresa;
+            $_SESSION['logado']       = true;
+
+            echo "<script>alert('Empresa cadastrada com sucesso!'); window.location.href = 'painelEmpresa.php';</script>";
+            exit();
+        } else {
+            echo "<div class='alert alert-danger text-center'>Erro no banco de dados: <strong>" . mysqli_error($conn) . "</strong></div>";
+        }
+    }
+
+} else {
+    header("Location: formEmpresa.php");
+    exit();
+}
+
+function filtrar_entrada($dado) {
+    $dado = trim($dado);
+    $dado = stripslashes($dado);
+    $dado = htmlspecialchars($dado);
+    return $dado;
+}
 ?>
 
-<?php include "footer.php" ?>
+<?php include "footer.php"; ?>

@@ -14,33 +14,33 @@
               <form action="actionEmpresa.php" method="POST" enctype="multipart/form-data">
 
               <h5 class="fw-bold mb-2 text-uppercase">Dados da Empresa:</h5>
+              
               <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="file" name="fotoEmpresa" id="fotoEmpresa" placeholder="Foto" class="form-control">
+                <input type="file" name="fotoEmpresa" id="fotoEmpresa" class="form-control">
                 <label for="fotoEmpresa">Logo da Empresa</label>
               </div>
 
               <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="text" name="nomeEmpresa" id="nomeEmpresa" placeholder="Nome" class="form-control form-control-lg" />
+                <input type="text" name="nomeEmpresa" id="nomeEmpresa" placeholder="Nome" class="form-control form-control-lg" required />
                 <label for="nomeEmpresa">Nome da Empresa</label>
               </div>
-
               
               <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="text" name="razaoSocialEmpresa" id="razaoSocialEmpresa" placeholder="razaoSocialEmpresa" class="form-control form-control-lg" />
+                <input type="text" name="razaoSocialEmpresa" id="razaoSocialEmpresa" placeholder="Razão Social" class="form-control form-control-lg" />
                 <label for="razaoSocialEmpresa">Razão Social</label>
               </div>
 
-            <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="date" name="dataFundacaoEmpresa" id="dataFundacaoEmpresa" placeholder="Data de Nascimento" class="form-control">
-                <label for="dataFundacaoEmpresa">Data de de Fundação</label>
+              <div class="form-floating mt-3 mb-3 text-dark">
+                <input type="date" name="dataFundacaoEmpresa" id="dataFundacaoEmpresa" class="form-control">
+                <label for="dataFundacaoEmpresa">Data de Fundação</label>
               </div>
 
               <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="text" name="cnpjEmpresa" id="cnpjEmpresa" placeholder="00.000.000./0000-00" class="form-control form-control-lg" maxlength="18" />
+                <input type="text" name="cnpjEmpresa" id="cnpjEmpresa" placeholder="00.000.000/0000-00" class="form-control form-control-lg" maxlength="18" />
                 <label for="cnpjEmpresa">CNPJ</label>
               </div>
 
-            <h5 class="fw-bold mb-2 text-uppercase">Localização:</h5>
+              <h5 class="fw-bold mb-2 mt-4 text-uppercase">Localização:</h5>
               <div class="form-floating mt-3 mb-3 text-dark">
                 <select name="estadoEmpresa" id="estadoEmpresa" class="form-select">
                   <option value="AC">Acre</option>
@@ -79,26 +79,26 @@
                 <label for="cidadeEmpresa">Cidade</label>
               </div>
 
-            <h5 class="fw-bold mb-2 text-uppercase">Conta e Acesso:</h5>
+              <h5 class="fw-bold mb-2 mt-4 text-uppercase">Conta e Acesso:</h5>
 
-            <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="email" name="emailEmpresa" id="emailEmpresa" placeholder="empresa@exemplo.com" class="form-control form-control-lg" />
+              <div class="form-floating mt-3 mb-3 text-dark">
+                <input type="email" name="emailEmpresa" id="emailEmpresa" placeholder="empresa@exemplo.com" class="form-control form-control-lg" required />
                 <label for="emailEmpresa">Email da Empresa:</label>
               </div>
 
               <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="password" name="senhaEmpresa" id="senhaEmpresa" placeholder="Senha" class="form-control form-control-lg" />
+                <input type="password" name="senhaEmpresa" id="senhaEmpresa" placeholder="Senha" class="form-control form-control-lg" required />
                 <label for="senhaEmpresa">Senha</label>
               </div>
 
               <div class="form-floating mt-3 mb-3 text-dark">
-                <input type="password" name="confirmarSenhaEmpresa" id="confirmarSenhaEmpresa" placeholder="Confirmar Senha" class="form-control form-control-lg" />
+                <input type="password" name="confirmarSenhaEmpresa" id="confirmarSenhaEmpresa" placeholder="Confirmar Senha" class="form-control form-control-lg" required />
                 <label for="confirmarSenhaEmpresa">Confirmar Senha</label>
               </div>
 
-            
-              <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5 mt-3" type="submit" href>Cadastrar</button>
-            </form>
+              <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5 mt-3" type="submit">Cadastrar</button>
+              
+              </form>
 
             </div>
 
@@ -108,4 +108,3 @@
     </div>
   </div>
 </section>
-

@@ -12,17 +12,18 @@
               <h2 class="fw-bold mb-2 text-uppercase">Login de Candidato</h2>
               <p class="text-white-50 mb-5">Por favor, informe seus dados de acesso:</p>
 
-              <div data-mdb-input-init class="form-outline form-white mb-4">
-                <input type="email" id="emailUsuario" class="form-control form-control-lg" />
-                <label class="form-label" for="emailUsuario">Email</label>
-              </div>
+              <form action="actionLoginCandidato.php" method="POST">
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <input type="email" id="emailUsuario" name="emailUsuario" class="form-control form-control-lg" required/>
+                  <label class="form-label" for="emailUsuario">Email</label>
+                </div>
 
-              <div data-mdb-input-init class="form-outline form-white mb-4">
-                <input type="password" id="senhaUsuario" class="form-control form-control-lg" />
-                <label class="form-label" for="senhaUsuario">Senha</label>
-              </div>
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <input type="password" id="senhaUsuario" name="senhaUsuario" class="form-control form-control-lg" required/>
+                  <label class="form-label" for="senhaUsuario">Senha</label>
+                </div>
 
-              <form action="index.php" method="POST">
+              
               <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
               </form>
               <div class="d-flex justify-content-center text-center mt-4 pt-1">
