@@ -1,4 +1,7 @@
 <?php include "header.php" ?>
+<br>
+<br>
+<br>
 
     <?php
         //Verifica se o método de envio das informações do form é "POST"
