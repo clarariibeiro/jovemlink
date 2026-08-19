@@ -11504,3 +11504,21 @@ body {
     display: block;
     margin-bottom: 2px;
 }
+
+/* Remove qualquer borda, sombra ou divisória interna da Navbar */
+.navbar-custom,
+.navbar-custom *,
+.navbar-custom .container,
+.navbar-custom .nav-item,
+.navbar-custom .nav-link {
+    border: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-image: none !important;
+}
+
+.navbar-custom {
+    background-color: #0b2e59 !important;
+}
