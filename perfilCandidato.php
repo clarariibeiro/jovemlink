@@ -29,12 +29,15 @@
                 <div class="d-flex flex-column flex-sm-row align-items-center align-items-sm-start gap-4">
                     <div class="text-center">
                         <img src="assets/img/ana.webp" alt="Ana Silva" class="rounded-circle img-thumbnail mb-2 shadow-sm" style="width: 120px; height: 120px; object-fit: cover;">
-                        <button class="btn btn-sm btn-outline-secondary w-100 jl-font-title"><i class="fa-solid fa-pencil me-1"></i> Foto</button>
+                        <a href="editar-perfil.php" class="btn btn-sm btn-outline-secondary w-100 jl-font-title"><i class="fa-solid fa-pencil me-1"></i> Foto</a>
                     </div>
                     <div class="user-details flex-grow-1 text-center text-sm-start">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <h2 class="jl-font-title fw-bold mb-0 jl-color-heading">Ana Silva</h2>
-                            <button class="btn btn-jl-primary btn-sm px-3 d-none d-sm-inline-block jl-font-title"><i class="fa-solid fa-pencil me-1"></i> Editar Perfil</button>
+                            <!-- Botão redirecionando para a nova página editar-perfil.php -->
+                            <a href="editarPerfil.php" class="btn btn-jl-primary btn-sm px-3 d-none d-sm-inline-block jl-font-title">
+                                <i class="fa-solid fa-pencil me-1"></i> Editar Perfil
+                            </a>
                         </div>
                         
                         <div class="row g-2 mt-2 text-muted">
@@ -67,7 +70,7 @@
                                     <h6 class="mb-0 fw-bold text-dark jl-font-title fs-5">Ensino Médio – Cursando 1º ano</h6>
                                 </div>
                             </div>
-                            <a href="#" class="text-decoration-none text-jl jl-font-title fw-semibold pe-2">Alterar</a>
+                            <a href="editar-perfil.php" class="text-decoration-none text-jl jl-font-title fw-semibold pe-2">Alterar</a>
                         </div>
                     </div>
 
@@ -83,7 +86,7 @@
                                     <h6 class="mb-0 fw-bold text-dark jl-font-title fs-5">Informática Básica, Excel Básico</h6>
                                 </div>
                             </div>
-                            <a href="#" class="text-decoration-none text-jl jl-font-title fw-semibold pe-2">Alterar</a>
+                            <a href="editar-perfil.php" class="text-decoration-none text-jl jl-font-title fw-semibold pe-2">Alterar</a>
                         </div>
                     </div>
 
@@ -99,7 +102,7 @@
                                     <h6 class="mb-0 fw-bold text-dark jl-font-title fs-5">Comunicação, Organização, Aprendizado rápido</h6>
                                 </div>
                             </div>
-                            <a href="#" class="text-decoration-none text-jl jl-font-title fw-semibold pe-2">Alterar</a>
+                            <a href="editar-perfil.php" class="text-decoration-none text-jl jl-font-title fw-semibold pe-2">Alterar</a>
                         </div>
                     </div>
 
@@ -115,7 +118,7 @@
                                     <h6 class="mb-0 fw-bold text-dark jl-font-title fs-5">Administrativo, Informática, Atendimento</h6>
                                 </div>
                             </div>
-                            <a href="#" class="text-decoration-none text-jl jl-font-title fw-semibold pe-2">Alterar</a>
+                            <a href="editar-perfil.php" class="text-decoration-none text-jl jl-font-title fw-semibold pe-2">Alterar</a>
                         </div>
                     </div>
                 </div>
@@ -126,12 +129,14 @@
         <!-- Coluna Direita -->
         <div class="col-lg-4">
             
-            <!-- Card PDF -->
+            <!-- Card Visualizar Currículo -->
             <div class="card border-0 shadow-sm p-4 mb-4 text-center rounded-3">
-                <h5 class="jl-font-title fw-bold mb-3 jl-color-heading">Currículo em PDF</h5>
-                <i class="fa-solid fa-file-pdf text-danger display-3 mb-2"></i>
-                <p class="small text-muted mb-3">Ana_Silva_Curriculo.pdf</p>
-                <button class="btn btn-outline-danger w-100 py-2 jl-font-title"><i class="fa-solid fa-download me-2"></i> Baixar PDF</button>
+                <h5 class="jl-font-title fw-bold mb-3 jl-color-heading">Visualizar Currículo</h5>
+                <i class="fa-solid fa-file-invoice text-jl display-3 mb-2"></i>
+                <p class="small text-muted mb-3">Veja como as empresas visualizam seu perfil em formato de currículo.</p>
+                <button class="btn btn-jl-primary w-100 py-2 jl-font-title" data-bs-toggle="modal" data-bs-target="#modalVisualizarCurriculo">
+                    <i class="fa-solid fa-eye me-2"></i> Visualizar Currículo
+                </button>
             </div>
 
             <!-- Checklist -->
@@ -157,5 +162,79 @@
 
     </div>
 </main>
+
+<!-- Modal de Visualização do Currículo -->
+<div class="modal fade" id="modalVisualizarCurriculo" tabindex="-1" aria-labelledby="modalVisualizarCurriculoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content border-0 shadow-lg">
+            
+            <div class="modal-header bg-light border-0">
+                <h5 class="modal-title jl-font-title fw-bold jl-color-heading" id="modalVisualizarCurriculoLabel">
+                    <i class="fa-solid fa-file-invoice text-jl me-2"></i> Pré-visualização do Currículo
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            
+            <div class="modal-body p-4 bg-light">
+                <!-- Modelo de Folha do Currículo -->
+                <div class="p-4 p-md-5 bg-white rounded-3 shadow-sm border">
+                    
+                    <!-- Cabeçalho -->
+                    <div class="row align-items-center pb-4 mb-4 border-bottom g-3">
+                        <div class="col-sm-3 text-center">
+                            <img src="assets/img/ana.webp" alt="Ana Silva" class="rounded-circle img-fluid border" style="width: 100px; height: 100px; object-fit: cover;">
+                        </div>
+                        <div class="col-sm-9 text-center text-sm-start">
+                            <h2 class="jl-font-title fw-bold mb-1 jl-color-heading">Ana Silva</h2>
+                            <p class="text-muted fw-semibold mb-2">Jovem Aprendiz / Assistente Administrativo</p>
+                            
+                            <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-sm-start text-muted small">
+                                <span><i class="fa-regular fa-calendar text-jl me-1"></i> 16 anos</span>
+                                <span><i class="fa-solid fa-location-dot text-jl me-1"></i> São Paulo - SP</span>
+                                <span><i class="fa-regular fa-envelope text-jl me-1"></i> ana.silva@email.com</span>
+                                <span><i class="fa-solid fa-phone text-jl me-1"></i> (11) 99999-9999</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conteúdo em Seções -->
+                    <div class="mb-4">
+                        <h6 class="text-uppercase fw-bold text-jl border-bottom pb-2 mb-3"><i class="fa-solid fa-graduation-cap me-2"></i> Escolaridade</h6>
+                        <p class="fw-bold mb-0">Ensino Médio</p>
+                        <p class="text-muted small mb-0">Cursando o 1º ano</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="text-uppercase fw-bold text-jl border-bottom pb-2 mb-3"><i class="fa-solid fa-book-open me-2"></i> Cursos Adicionais</h6>
+                        <ul class="list-unstyled mb-0 text-muted">
+                            <li class="mb-2"><i class="fa-solid fa-check text-jl me-2"></i><strong>Informática Básica:</strong> Operação de Sistemas e Navegação.</li>
+                            <li><i class="fa-solid fa-check text-jl me-2"></i><strong>Excel Básico:</strong> Planilhas e Fórmulas Iniciais.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="text-uppercase fw-bold text-jl border-bottom pb-2 mb-3"><i class="fa-regular fa-star me-2"></i> Habilidades Principais</h6>
+                        <div class="d-flex flex-wrap gap-2 pt-1">
+                            <span class="badge bg-light text-dark border px-3 py-2 fw-normal">Comunicação</span>
+                            <span class="badge bg-light text-dark border px-3 py-2 fw-normal">Organização</span>
+                            <span class="badge bg-light text-dark border px-3 py-2 fw-normal">Aprendizado rápido</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h6 class="text-uppercase fw-bold text-jl border-bottom pb-2 mb-3"><i class="fa-solid fa-bullseye me-2"></i> Área de Interesse</h6>
+                        <p class="text-muted mb-0">Administrativo, Informática, Atendimento ao Cliente</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer bg-light border-0">
+                <button type="button" class="btn btn-secondary px-4 jl-font-title" data-bs-dismiss="modal">Fechar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <?php include "footer.php"; ?>
