@@ -8,7 +8,7 @@
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6 order-lg-2">
                         <div class="p-5">
-                            <img class="img-fluid rounded-circle" src="assets/img/trabalho.jpg" style="aspect-ratio: 1 / 1; object-fit: cover;" alt="..." />
+                            <img class="img-fluid rounded-circle" src="assets/img/01.jpg" style="aspect-ratio: 1 / 1; object-fit: cover;" alt="..." />
                         </div>
                     </div>
                     <div class="col-lg-6 order-lg-1">
@@ -29,7 +29,7 @@
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6">
                         <div class="p-5">
-                            <img class="img-fluid rounded-circle" src="assets/img/work.png" style="aspect-ratio: 1 / 1; object-fit: cover;" alt="..." />
+                            <img class="img-fluid rounded-circle" src="assets/img/02.jpg" style="aspect-ratio: 1 / 1; object-fit: cover;" alt="..." />
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -50,7 +50,7 @@
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6 order-lg-2">
                         <div class="p-5">
-                            <img class="img-fluid rounded-circle" src="assets/img/jovem.webp" style="aspect-ratio: 1 / 1; object-fit: cover;" alt="..." />
+                            <img class="img-fluid rounded-circle" src="assets/img/03.jpg" style="aspect-ratio: 1 / 1; object-fit: cover;" alt="..." />
                         </div>
                     </div>
                     <div class="col-lg-6 order-lg-1">
