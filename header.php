@@ -27,7 +27,7 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="formLogin.php">LOGIN - CANDIDATO</a></li>
                         <li class="nav-item"><a class="nav-link" href="formLoginEmpresa.php">LOGIN - EMPRESA</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Perfil do Candidato</a></li>
+                        <li class="nav-item"><a class="nav-link" href="perfilCandidato.php">Perfil do Candidato</a></li>
                     </ul>
                 </div>
             </div>
