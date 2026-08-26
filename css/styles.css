@@ -12009,3 +12009,41 @@ body {
     border-color: #0d6efd !important;
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
 }
+
+/* Estilo da Sidebar Lateral */
+.sidebar {
+    background-color: #ffffff;
+    min-height: 100vh;
+    border-right: 1px solid #e9ecef;
+}
+
+/* Links do menu */
+.sidebar .nav-link {
+    color: #0b2e59;
+    font-weight: 400 !important;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+/* Efeito ao passar o mouse */
+.sidebar .nav-link:hover {
+    background-color: #f8f9fa;
+    color: #0d6efd;
+}
+
+/* Item ativo (sem negrito se não desejar) */
+.sidebar .nav-link.active {
+    background-color: #e7f1ff;
+    color: #0d6efd !important;
+    font-weight: 400 !important;
+}
+
+.sidebar .nav-link.active {
+    background-color: #0d6efd !important;
+    color: #ffffff !important;
+}
+
+.sidebar .nav-link.active i {
+    color: #ffffff !important;
+}
