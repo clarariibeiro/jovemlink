@@ -43,7 +43,7 @@
                         <p class="text-muted mb-0">Atualize seus dados pessoais e de contato para que as empresas te encontrem.</p>
                     </div>
                     <div class="col-md-4 text-md-end">
-                        <a href="curriculo.php" class="btn btn-outline-secondary jl-font-title">
+                        <a href="perfilCandidato.php" class="btn btn-outline-secondary jl-font-title">
                             <i class="fa-solid fa-arrow-left me-1"></i> Voltar ao Currículo
                         </a>
                     </div>
