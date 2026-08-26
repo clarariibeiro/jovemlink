@@ -16,6 +16,17 @@
     
     <!-- CSS Customizado -->
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Correção de visibilidade da Sidebar -->
+    <style>
+        .sidebar .nav-link.active,
+        .sidebar .nav-link.active * {
+            background-color: #0d6efd !important;
+            color: #ffffff !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    </style>
 </head>
 <body>
 

@@ -22,7 +22,15 @@
 <div class="container-fluid p-0">
     <div class="row g-0">
 
-        <?php include 'sidebar.php'; ?>
+        <!-- Sidebar Estática -->
+        <div class="col-md-3 col-lg-2 sidebar shadow-sm pt-4">
+            <nav class="nav flex-column px-2 gap-1">
+                <a class="nav-link" href="perfilCandidato.php" style="font-weight: normal !important;"><i class="bi bi-file-person me-2"></i> Meu currículo</a>
+                <a class="nav-link" href="listarVagas.php" style="font-weight: normal !important;"><i class="bi bi-briefcase me-2"></i> Oportunidades</a>
+                <a class="nav-link" href="editarPerfil.php" style="font-weight: normal !important;"><i class="bi bi-person me-2"></i> Perfil</a>
+                <a class="nav-link text-danger mt-4" href="sair.php" style="font-weight: normal !important;"><i class="bi bi-box-arrow-right me-2"></i> Sair</a>
+            </nav>
+        </div>
 
         <!-- Conteúdo Principal -->
         <div class="col-md-9 col-lg-10">
@@ -57,7 +65,8 @@
                             <div class="d-flex flex-column flex-sm-row align-items-center align-items-sm-start gap-4">
                                 <div class="text-center">
                                     <img src="assets/img/ana.webp" alt="Ana Silva" class="rounded-circle img-thumbnail mb-2 shadow-sm" style="width: 120px; height: 120px; object-fit: cover;">
-                                    <a href="editarPerfil.php" class="btn btn-sm btn-outline-primary w-100"><i class="bi bi-pencil me-1"></i> Foto</a>                                </div>
+                                    <a href="editarPerfil.php" class="btn btn-sm btn-outline-primary w-100"><i class="bi bi-pencil me-1"></i> Foto</a>
+                                </div>
                                 <div class="user-details flex-grow-1 text-center text-sm-start">
                                     <div class="d-flex justify-content-between align-items-center mb-2">
                                         <h2 class="display-6 fw-bold mb-0" style="color: #0b2e59 !important;">Ana Silva</h2>
