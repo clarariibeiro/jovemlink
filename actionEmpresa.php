@@ -1,5 +1,4 @@
 <?php
-echo "<script>window.location.href = 'formCadastrarVaga.php';</script>";
 // 1. Inicia a sessão no topo antes de qualquer saída de texto ou HTML
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -14,8 +13,8 @@ include "header.php";
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // 1. Processamento da Foto em Primeiro Lugar
-    $diretorio   = "assets/img/"; 
+    // 1. Processamento da Foto
+    $diretorio = "assets/img/"; 
     if (!file_exists($diretorio)) {
         mkdir($diretorio, 0777, true);
     }
@@ -34,15 +33,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // 2. Captura dos demais campos
-    $nomeEmpresa           = filtrar_entrada($_POST["nomeEmpresa"] ?? "");
-    $razaoSocialEmpresa    = filtrar_entrada($_POST["razaoSocialEmpresa"] ?? "");
-    $dataFundacaoRaw       = filtrar_entrada($_POST["dataFundacaoEmpresa"] ?? "");
-    $cnpjEmpresa           = filtrar_entrada($_POST["cnpjEmpresa"] ?? "");
-    $estadoEmpresa         = filtrar_entrada($_POST["estadoEmpresa"] ?? "");
-    $cidadeEmpresa         = filtrar_entrada($_POST["cidadeEmpresa"] ?? "");
-    $emailEmpresa          = filtrar_entrada($_POST["emailEmpresa"] ?? "");
-    $senhaInput            = filtrar_entrada($_POST["senhaEmpresa"] ?? "");
-    $confirmarSenhaInput   = filtrar_entrada($_POST["confirmarSenhaEmpresa"] ?? "");
+    $nomeEmpresa        = filtrar_entrada($_POST["nomeEmpresa"] ?? "");
+    $razaoSocialEmpresa = filtrar_entrada($_POST["razaoSocialEmpresa"] ?? "");
+    $dataFundacaoRaw    = filtrar_entrada($_POST["dataFundacaoEmpresa"] ?? "");
+    $cnpjEmpresa        = filtrar_entrada($_POST["cnpjEmpresa"] ?? "");
+    $estadoEmpresa      = filtrar_entrada($_POST["estadoEmpresa"] ?? "");
+    $cidadeEmpresa      = filtrar_entrada($_POST["cidadeEmpresa"] ?? "");
+    $emailEmpresa       = filtrar_entrada($_POST["emailEmpresa"] ?? "");
+    $senhaInput         = filtrar_entrada($_POST["senhaEmpresa"] ?? "");
+    $confirmarSenhaInput= filtrar_entrada($_POST["confirmarSenhaEmpresa"] ?? "");
 
     // Ajuste do formato da data de fundação
     $dataFundacaoEmpresa = !empty($dataFundacaoRaw) ? date('Y-m-d', strtotime($dataFundacaoRaw)) : date('Y-m-d');
@@ -74,7 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $cidadeEmpresa      = mysqli_real_escape_string($conn, $cidadeEmpresa);
         $emailEmpresa       = mysqli_real_escape_string($conn, $emailEmpresa);
 
-        // INSERT mantendo fotoEmpresa como o primeiro parâmetro
         $sql = "INSERT INTO Empresa (
                     fotoEmpresa, 
                     nomeEmpresa, 
@@ -100,12 +98,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 )";
 
         if (mysqli_query($conn, $sql)) {
+            // Define as sessões para a empresa recém-cadastrada estar logada
             $_SESSION['idEmpresa']    = mysqli_insert_id($conn);
             $_SESSION['nomeEmpresa']  = $nomeEmpresa;
             $_SESSION['emailEmpresa'] = $emailEmpresa;
             $_SESSION['logado']       = true;
 
-            echo "<script>alert('Empresa cadastrada com sucesso!'); window.location.href = 'painelEmpresa.php';</script>";
+            // Redireciona para o formulário de cadastro de vaga
+            echo "<script>alert('Empresa cadastrada com sucesso! Cadastre sua primeira vaga.'); window.location.href = 'formCadastrarVaga.php';</script>";
             exit();
         } else {
             echo "<div class='alert alert-danger text-center'>Erro no banco de dados: <strong>" . mysqli_error($conn) . "</strong></div>";

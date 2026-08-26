@@ -1,85 +1,74 @@
-<?php include "header.php" ?>
-<br>
-<br>
-<br>
+<?php include "header.php"; ?>
+<br><br><br>
 
-    <?php
-        // Verifica se o método de envio das informações do form é "POST"
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include "conexaoBD.php";
+
+    $emailInput = filtrar_entrada($_POST["emailUsuario"] ?? '');
+    $senhaInput = $_POST["senhaUsuario"] ?? '';
+
+    if (empty($emailInput) || empty($senhaInput)) {
+        echo "<div class='alert alert-warning text-center'>Preencha todos os campos!</div>";
+        echo "<div class='text-center mt-3'><a href='formLogin.php' class='btn btn-primary'>Tentar novamente</a></div>";
+        include "footer.php";
+        exit();
+    }
+
+    // Busca o candidato na tabela usando as colunas reais
+    $sql = "SELECT * FROM candidato WHERE emailUsuario = '$emailInput' LIMIT 1";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $usuario = mysqli_fetch_assoc($result);
+        
+        $senhaMD5 = md5(filtrar_entrada($senhaInput));
+        $senhaBanco = $usuario['senhaUsuario'];
+
+        // Aceita a senha em MD5, texto puro ou hash padrão
+        if ($senhaMD5 === $senhaBanco || $senhaInput === $senhaBanco || password_verify($senhaInput, $senhaBanco)) {
             
-            // Inclui a conexão com o banco
-            include "conexaoBD.php";
-
-            // Cria variáveis para armazenar as informações do formulário
-            $emailCandidato = $senhaCandidato = "";
-            $erroPreenchimento = false;
-
-            // Validação do campo emailCandidato
-            if(empty($_POST["emailUsuario"])){
-                echo "<div class='alert alert-warning text-center'>O campo <strong>E-MAIL</strong> é obrigatório!</div>";
-                $erroPreenchimento = true;
-            }
-            else{
-                $emailCandidato = filtrar_entrada($_POST["emailUsuario"]);
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
             }
 
-            // Validação do campo senhaCandidato
-            if(empty($_POST["senhaUsuario"])){
-                echo "<div class='alert alert-warning text-center'>O campo <strong>SENHA</strong> é obrigatório!</div>";
-                $erroPreenchimento = true;
-            }
-            else{
-                $senhaCandidato = md5(filtrar_entrada($_POST["senhaUsuario"]));
-            }
+            // 1. Limpa totalmente os dados residuais da conta anterior
+            session_unset();
 
-            // Se não houver campos vazios, faz a consulta no banco
-            if(!$erroPreenchimento){
+            // 2. Regenera a sessão criando um ID novo e seguro no servidor
+            session_regenerate_id(true);
 
-                // Prepara a consulta na tabela Candidato
-                $buscarLogin = "SELECT * 
-                                FROM Usuarios 
-                                WHERE emailUsuario = '$emailCandidato' 
-                                AND senhaUsuario = '$senhaCandidato'";
+            // 3. Salva com precisão os dados do NOVO usuário logado
+            $idCandidato = $usuario['idCandidato'];
 
-                $efetuarLogin = mysqli_query($conn, $buscarLogin); 
+            $_SESSION['logado']        = true;
+            $_SESSION['idCandidato']   = $idCandidato;
+            $_SESSION['idUsuario']     = $idCandidato; 
+            $_SESSION['nomeCandidato'] = $usuario['nomeUsuario'] ?? 'Candidato';
+            $_SESSION['nomeUsuario']   = $usuario['nomeUsuario'] ?? 'Candidato';
+            $_SESSION['emailUsuario']  = $usuario['emailUsuario'] ?? '';
+            $_SESSION['fotoUsuario']   = $usuario['fotoUsuario'] ?? '';
 
-                if($registro = mysqli_fetch_assoc($efetuarLogin)){
-
-                    // Inicia a sessão
-                    if (session_status() === PHP_SESSION_NONE) {
-                        session_start();
-                    }
-
-                    // Salva as variáveis de sessão no padrão Candidato
-                    $_SESSION['idCandidato']    = $registro['idUsuario'];
-                    $_SESSION['nomeCandidato']  = $registro['nomeUsuario'];
-                    $_SESSION['emailCandidato'] = $registro['emailUsuario'];
-                    $_SESSION['logado']         = true;
-
-                    // Redireciona diretamente para listarVagas.php
-                    header('location:listarVagas.php');
-                    exit();
-
-                }
-                else{
-                    echo "<div class='alert alert-danger text-center'><strong>E-MAIL</strong> ou <strong>SENHA</strong> incorretos!</div>";
-                    echo "<div class='text-center mt-3'><a href='formLogin.php' class='btn btn-primary'>Tentar novamente</a></div>";
-                }
-            }
-
-        }
-        else{
-            header("location:formLogin.php");
+            header('Location: listarVagas.php');
             exit();
         }
+    }
 
-        // Função para filtrar entrada de dados
-        function filtrar_entrada($dado){
-            $dado = trim($dado);
-            $dado = stripslashes($dado);
-            $dado = htmlspecialchars($dado);
-            return($dado);
-        }
-    ?>
+    // Mensagem de erro caso e-mail/senha não confirmem no banco
+    echo "<div class='alert alert-danger text-center'><strong>E-MAIL</strong> ou <strong>SENHA</strong> incorretos!</div>";
+    echo "<div class='text-center mt-3'><a href='formLogin.php' class='btn btn-primary'>Tentar novamente</a></div>";
 
-<?php include "footer.php" ?>
+} else {
+    header("Location: formLogin.php");
+    exit();
+}
+
+function filtrar_entrada($dado){
+    $dado = trim($dado);
+    $dado = stripslashes($dado);
+    $dado = htmlspecialchars($dado);
+    return $dado;
+}
+?>
+
+<?php include "footer.php"; ?>
